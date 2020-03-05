@@ -1,4 +1,7 @@
-package com.practice.sutda.card;
+package com.practice.sutda.user;
+
+import com.practice.sutda.card.SutdaCard;
+import com.practice.sutda.card.Kwang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +12,7 @@ public class Player {
     public static final String MESSAGE_ERROR_ROW_CARD = "카드 숫자가 모자랍니다";
     public static final int CARD_SIZE = 2;
 
-    private List<Card> cards = new ArrayList<>();
+    private List<SutdaCard> sutdaCards = new ArrayList<>();
     private Kwang kwang;
     static Random random = new Random();
 
@@ -20,20 +23,20 @@ public class Player {
     }
 
     private void drawCard() {
-        if (cards.size() < CARD_SIZE) {
-            cards.add(Card.of(createRandomNumberExclusiveZero(BOUND)));
+        if (sutdaCards.size() < CARD_SIZE) {
+            sutdaCards.add(SutdaCard.of(createRandomNumberExclusiveZero(BOUND)));
             drawCard();
         }
     }
 
     private void validateCard() {
-        if (cards.size() > CARD_SIZE + 1) {
+        if (sutdaCards.size() > CARD_SIZE + 1) {
             throw new IllegalArgumentException(MESSAGE_ERROR_ROW_CARD);
         }
     }
 
     private void createKwang() {
-        kwang = new Kwang(cards.get(0), cards.get(1));
+        kwang = new Kwang(sutdaCards.get(0), sutdaCards.get(1));
     }
 
 
@@ -42,7 +45,7 @@ public class Player {
     }
 
     public int size() {
-        return cards.size();
+        return sutdaCards.size();
     }
 
     private int createRandomNumberExclusiveZero(int bound) {
