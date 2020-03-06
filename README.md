@@ -11,3 +11,5 @@ JUnit Test 코드를 작성하여 자바 학습과 테스트코드 연습 두 �
 [commit_b3679c](https://github.com/sihyung92/java_practice/commit/b3679c17b7226a9b298c577550d666e1741240d4)
 
 2일 : OOP 학습 - project Sutda : 섯다 기능 확장
+
+3일 : 

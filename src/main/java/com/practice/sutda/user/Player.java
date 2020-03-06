@@ -1,7 +1,7 @@
 package com.practice.sutda.user;
 
 import com.practice.sutda.card.SutdaCard;
-import com.practice.sutda.card.Kwang;
+import com.practice.sutda.card.Ddeng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Player {
     public static final int CARD_SIZE = 2;
 
     private List<SutdaCard> sutdaCards = new ArrayList<>();
-    private Kwang kwang;
+    private Ddeng ddeng;
     static Random random = new Random();
 
     public void spendTurn() {
@@ -36,12 +36,12 @@ public class Player {
     }
 
     private void createKwang() {
-        kwang = new Kwang(sutdaCards.get(0), sutdaCards.get(1));
+        ddeng = new Ddeng(sutdaCards.get(0), sutdaCards.get(1));
     }
 
 
-    public boolean isKwang() {
-        return kwang.isKwang();
+    public boolean getDdeng() {
+        return ddeng.isDdeng();
     }
 
     public int size() {

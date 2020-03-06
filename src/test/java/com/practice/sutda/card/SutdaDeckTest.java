@@ -19,6 +19,7 @@ public class SutdaDeckTest {
     void makeDecksByArgNumTest(int numberOfCardDecks) {
         //given
         SutdaDeck sutdaDeck;
+        int numberOfEachCard = numberOfCardDecks * 2;
 
         //when
         sutdaDeck = new SutdaDeck(numberOfCardDecks);
@@ -27,9 +28,9 @@ public class SutdaDeckTest {
         assertThat(
                 (int) sutdaDeck.getSutdaCardList()
                         .stream()
-                        .filter(x -> x.getNumber() == 1)
+                        .filter(x -> x.getMonthNumber() == 1)
                         .count()
-        ).isEqualTo(numberOfCardDecks);
+        ).isEqualTo(numberOfEachCard);
     }
 
     @DisplayName("셔플 테스트")
@@ -39,7 +40,8 @@ public class SutdaDeckTest {
         SutdaDeck sutdaDeck = new SutdaDeck();
 
         //when
-        List<SutdaCard> beforeSutdaCards = (List<SutdaCard>) ((ArrayList<SutdaCard>) sutdaDeck.getSutdaCardList()).clone();
+        List<SutdaCard> beforeSutdaCards = new ArrayList();
+        beforeSutdaCards.addAll(sutdaDeck.getSutdaCardList());
         sutdaDeck.shuffle();
         List<SutdaCard> afterSutdaCards = sutdaDeck.getSutdaCardList();
 
@@ -51,7 +53,7 @@ public class SutdaDeckTest {
 
     @DisplayName("카드 한장 골라오기 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"0:1", "1:2", "11:12"}, delimiter = ':')
+    @CsvSource(value = {"0:1", "1:1", "2:2", "3:2"}, delimiter = ':')
     void pickTest(int index, int result) {
         //given
         SutdaDeck sutdaDeck = new SutdaDeck();
@@ -60,7 +62,7 @@ public class SutdaDeckTest {
         SutdaCard sutdaCard = sutdaDeck.pick(index);
 
         //then
-        assertThat(sutdaCard.getNumber())
+        assertThat(sutdaCard.getMonthNumber())
                 .as("인덱스로 잘 골라오는지")
                 .isEqualTo(result);
     }

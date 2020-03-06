@@ -16,11 +16,11 @@ class SutdaCardTest {
         assertThatThrownBy(() -> SutdaCard.of(arg)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("올바르지 않은 숫자입니다.");
     }
 
-    @DisplayName("광이 잘 생성되는지")
+    @DisplayName("땡이 잘 생성되는지")
     @ParameterizedTest
     @CsvSource(value = {"1,1,true", "2,2,true", "11,11,true", "1,2,false"})
-    public void kwangTest(int cardNumber1, int cardNumber2, boolean expectedResult) {
-        Kwang kwang = new Kwang(SutdaCard.of(cardNumber1), SutdaCard.of(cardNumber2));
-        assertThat(kwang.isKwang()).isEqualTo(expectedResult);
+    public void ddengTest(int cardNumber1, int cardNumber2, boolean expectedResult) {
+        Ddeng ddeng = new Ddeng(SutdaCard.of(cardNumber1), SutdaCard.of(cardNumber2));
+        assertThat(ddeng.isDdeng()).isEqualTo(expectedResult);
     }
 }
