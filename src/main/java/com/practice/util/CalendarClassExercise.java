@@ -12,8 +12,6 @@ public class CalendarClassExercise {
         beforeEachExercise("exercise2", "두 날짜사이의 월급일 구하기");
         exercise2("2010-01-20", "2010-01-21");
         afterEachExercise();
-
-
     }
 
     private static void beforeEachExercise(String exerciseName, String description) {

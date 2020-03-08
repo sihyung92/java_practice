@@ -1,27 +1,11 @@
 package com.practice.lang;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StringMethodExercise {
     private static final String delimeter = "\\";
-
-    public static void main(String[] args) {
-        beforeEachExercise("exercise1", "패스 쪼개기(문자열 쪼개기)");
-        exercise1();
-        afterEachExercise();
-
-        beforeEachExercise("exercise2", "formatter 만들기");
-        exercise2("가나다", 11, 0);
-        exercise2("가나다", 11, 1);
-        exercise2("가나다", 11, 2);
-        afterEachExercise();
-
-        beforeEachExercise("exercise3", "특정 문자열과 일치하는 갯수 구하기");
-        exercise3("가abdddg가qweoora가qssksad가", "가");
-        afterEachExercise();
-    }
 
     public static void beforeEachExercise(String exerciseName, String description) {
         System.out.println(exerciseName + "::" + description);
@@ -37,20 +21,17 @@ public class StringMethodExercise {
      * path:c:\jdk1.8\work
      * fileName:PathSeparateTest.java
      * */
-    public static void exercise1() {
-        String fullPath = "c:\\jdk1.8\\work\\PathSeparateTest.java";
-        String path = "";
-        String fileName = "";
+    public static Map<String, String> exercise1(String fullPath) {
+        Map<String, String> resultMap = new HashMap<>();
 
         int lastIndex = fullPath.lastIndexOf(delimeter);
-        if (lastIndex != fullPath.length()) {
-            fileName = fullPath.substring(lastIndex + 1);
-        }
-        path = fullPath.substring(0, lastIndex);
 
-        System.out.println("fullPath:" + fullPath);
-        System.out.println("path:" + path);
-        System.out.println("fileName:" + fileName);
+        if (lastIndex != fullPath.length()) {
+            resultMap.put("fileName", fullPath.substring(lastIndex + 1));
+        }
+
+        resultMap.put("path", fullPath.substring(0, lastIndex));
+        return resultMap;
     }
 
     /*
@@ -62,7 +43,7 @@ public class StringMethodExercise {
      * int alignment - 변환된 문자열의 정렬조건
      * (0: 왼쪽 , 1: 가운데 , 2: 오른쪽)
      */
-    public static void exercise2(String str, int length, int alignment) {
+    public static String exercise2(String str, int length, int alignment) {
         if (str.length() > length) {
             str = str.substring(0, length);
         }
@@ -82,25 +63,27 @@ public class StringMethodExercise {
         for (int i = 0; i < temp.length; i++) {
             chars[startIndex + i] = temp[i];
         }
-        System.out.println(chars);
+        return new String(chars);
     }
 
     /*
      * 하나의 긴 문자열 중에서 특정 문자열과 일치하는 문자열의 개수 (source)를 구하는 예제
      * */
-    static void exercise3(String src, String key) {
-        exercise3(src, key, 0);
+    static int exercise3(String src, String key) {
+        return exercise3(src, key, 0);
     }
 
-    static void exercise3(String src, String key, int pos) {
+    static int exercise3(String src, String key, int pos) {
         int count = 0;
         int index = 0;
-        if (key == null || key.length() == 0)
-            return;
+        if (key == null || key.length() == 0) {
+            return src.length();
+        }
         while ((index = src.indexOf(key, pos)) != -1) {
             count++;
             pos = index + key.length();
         }
-        System.out.println(count);
+
+        return count;
     }
 }
