@@ -18,7 +18,7 @@ public class OutputView {
 
     public static final String WRONG_FORMAT_MESSAGE = "양식에 맞게 입력해주세요";
     public static final String EXIT_MESSAGE = "프로그램이 종료되었습니다.";
-    public static final String STUDENT_INFOMATION_FORMAT = "%d\t%s";
+    public static final String STUDENT_INFOMATION_FORMAT = "%s\t%s";
 
     public static void printIntro() {
         System.out.println(LINE_SEPARATOR_TWO);
@@ -49,7 +49,7 @@ public class OutputView {
         System.out.println(LINE_SEPARATOR_ONE);
     }
 
-    public static void printStudentInfo(int studentId, String name) {
+    public static void printStudentInfo(String studentId, String name) {
         System.out.println(String.format(STUDENT_INFOMATION_FORMAT, studentId, name));
     }
 }
