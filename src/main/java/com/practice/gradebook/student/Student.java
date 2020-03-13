@@ -1,5 +1,7 @@
 package com.practice.gradebook.student;
 
+import com.practice.gradebook.score.Score;
+
 import java.util.Objects;
 
 public class Student {

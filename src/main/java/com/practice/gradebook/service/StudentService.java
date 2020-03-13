@@ -53,10 +53,10 @@ public class StudentService {
     }
 
     public static void printStudent() {
-        Students.getStudents()
+        Students.showStudentsIdAndName()
                 .stream()
-                .forEach(student ->
-                        OutputView.printStudentInfo(student.getStudentID(), student.getName())
+                .forEach(studentIdAndName ->
+                        OutputView.printStudentInfo(studentIdAndName[0], studentIdAndName[1])
                 );
     }
 }
