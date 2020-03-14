@@ -1,7 +1,5 @@
 package com.practice.gradebook.student;
 
-import com.practice.gradebook.score.Score;
-
 import java.util.Objects;
 
 public class Student {
@@ -10,7 +8,6 @@ public class Student {
     private int gradeNumber;
     private int classNumber;
     private int personalNumber;
-    private Score score;
 
     public Student(String name, int gradeNumber, int classNumber, int personalNumber) {
         this.name = name;
@@ -33,12 +30,12 @@ public class Student {
         this.studentID = Integer.parseInt(sb.toString());
     }
 
-    public void setScore(Score score) {
-        this.score = score;
-    }
-
     public int getStudentID() {
         return studentID;
+    }
+
+    public boolean matchStudentID(int studentID) {
+        return this.studentID == studentID;
     }
 
     public String getName() {
@@ -55,7 +52,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, studentID, gradeNumber, classNumber, personalNumber, score);
+        return Objects.hash(name, studentID, gradeNumber, classNumber, personalNumber);
     }
 
     @Override
@@ -66,7 +63,6 @@ public class Student {
                 ", gradeNumber=" + gradeNumber +
                 ", classNumber=" + classNumber +
                 ", personalNumber=" + personalNumber +
-                ", score=" + score +
                 '}';
     }
 }
