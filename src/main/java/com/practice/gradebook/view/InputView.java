@@ -9,17 +9,32 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    public static int inputMenu() {
+        return convertToInteger(inputProperString());
+    }
+
     public static String inputStudent() {
-        String input = scanner.nextLine();
+        return inputProperString();
+    }
+
+    public static String inputScore() {
+        return inputProperString();
+    }
+
+    public static int inputStudentId() {
+        return convertToInteger(inputProperString());
+    }
+
+    private static String inputProperString() {
+        String input = inputString();
         input = input.trim();
         validateNullOrEmpty(input);
         return input;
     }
 
-    public static int inputMenu() {
-        return convertToInteger(inputStudent());
+    private static String inputString() {
+        return scanner.nextLine();
     }
-
     private static void validateNullOrEmpty(String input) {
         if (Objects.isNull(input) || input.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_OR_NULL_MESSAGE);

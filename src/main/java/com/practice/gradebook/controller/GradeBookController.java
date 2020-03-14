@@ -1,6 +1,8 @@
 package com.practice.gradebook.controller;
 
+import com.practice.gradebook.service.ScoreService;
 import com.practice.gradebook.service.StudentService;
+import com.practice.gradebook.student.Student;
 import com.practice.gradebook.view.InputView;
 import com.practice.gradebook.view.OutputView;
 
@@ -26,6 +28,7 @@ public class GradeBookController {
                 printStudent();
             }
             if (process == SCORE_INSERT_PROCESS) {
+                insertScore();
             }
             if (process == SCORE_PRINT_PROCESS) {
             }
@@ -36,14 +39,22 @@ public class GradeBookController {
         OutputView.printExit();
     }
 
+    private void insertScore() {
+        OutputView.requestStudentID();
+        Student aStudent = StudentService.findStudentByID(InputView.inputStudentId());
+        OutputView.printScoreInfo();
+        ScoreService.insertScore(aStudent, InputView.inputScore());
+    }
+
+
     private void printStudent() {
         OutputView.printStudentIntro();
         studentService.printStudent();
     }
 
     private void registStudent() {
-        OutputView.printRequestMessage();
         do {
+            OutputView.printInputIntroduceMessage();
             studentService.registStudent(InputView.inputStudent());
             OutputView.askContinue();
         } while (InputView.inputMenu() == CONTINUE_PROCESS);
