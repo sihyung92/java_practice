@@ -33,7 +33,7 @@ public class Score {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
 
-    public Map<Subject, Integer> showPersonalScores() {
+    public Map<Subject, Integer> createPersonalScores() {
         return score.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }

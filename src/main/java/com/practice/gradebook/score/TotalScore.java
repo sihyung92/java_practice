@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class TotalScore {
     private static Map<Student, Score> totalScore = new HashMap<>();
 
+    private TotalScore(){}
+
     public static Map<Student, Score> showAllScores() {
         return totalScore.entrySet().stream()
                 .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));

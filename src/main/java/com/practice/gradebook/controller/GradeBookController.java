@@ -31,12 +31,18 @@ public class GradeBookController {
                 insertScore();
             }
             if (process == SCORE_PRINT_PROCESS) {
+                printAllScore();
             }
             if (process == EXIT_PROCESS) {
                 break;
             }
         }
         OutputView.printExit();
+    }
+
+    private void printAllScore() {
+        OutputView.printBeforeAllScore();
+        ScoreService.printTotalScore();
     }
 
     private void insertScore() {

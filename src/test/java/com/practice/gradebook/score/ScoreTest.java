@@ -8,10 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,7 +21,7 @@ class ScoreTest {
     void 점수_입력_테스트(Student student, String input, String expectedResult) {
         //given
         ScoreService.insertScore(student, input);
-        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).showPersonalScores();
+        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).createPersonalScores();
 
         //when
         List<Subject> subjects = new ArrayList<>(scoreMap.keySet());
@@ -52,7 +49,7 @@ class ScoreTest {
 
         //when
         ScoreService.modifySubjectScore(student, input2, subject);
-        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).showPersonalScores();
+        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).createPersonalScores();
 
         List<Subject> subjects = new ArrayList<>(scoreMap.keySet());
         subjects.sort(Comparator.comparingInt(Enum::ordinal));

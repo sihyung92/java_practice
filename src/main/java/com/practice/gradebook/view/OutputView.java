@@ -59,4 +59,13 @@ public class OutputView {
     public static void requestStudentID() {
         System.out.println("성적을 입력할 학생의 학번을 입력해주세요");
     }
+
+    public static void printAllScore(int studentID, int kor, int eng, int math) {
+        System.out.println(String.format("%d\t%d\t%d\t%d",studentID,kor,eng,math));
+    }
+
+    public static void printBeforeAllScore() {
+        System.out.println("학번\t국어\t영어\t수학");
+        System.out.println(LINE_SEPARATOR_ONE);
+    }
 }
