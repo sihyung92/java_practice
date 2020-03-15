@@ -1,5 +1,7 @@
 package com.practice.gradebook.student;
 
+import com.practice.gradebook.score.Score;
+
 import java.util.Objects;
 
 public class Student {
@@ -8,6 +10,8 @@ public class Student {
     private int gradeNumber;
     private int classNumber;
     private int personalNumber;
+    private Score score;
+    private Rank rank;
 
     public Student(String name, int gradeNumber, int classNumber, int personalNumber) {
         this.name = name;
@@ -40,6 +44,30 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public Score getScore(){
+        return score;
+    }
+
+    public int getGradeNumber() {
+        return gradeNumber;
+    }
+
+    public int getClassNumber() {
+        return classNumber;
+    }
+
+    public void setScore(Score score){
+        this.score = score;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
     }
 
     @Override

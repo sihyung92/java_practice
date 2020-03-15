@@ -1,9 +1,6 @@
 package com.practice.gradebook.student;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Students {
@@ -25,6 +22,10 @@ public class Students {
         return students.stream()
                 .map(student -> new String[]{String.valueOf(student.getStudentID()), student.getName()})
                 .collect(Collectors.toList());
+    }
+
+    public static List<Student> list(){
+        return new ArrayList<>(students);
     }
 
     public static Student findStudentByID(int studentID) {

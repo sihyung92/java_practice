@@ -1,6 +1,7 @@
 package com.practice.gradebook.score;
 
 import com.practice.gradebook.service.ScoreService;
+import com.practice.gradebook.student.Rank;
 import com.practice.gradebook.student.Student;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class ScoreTest {
     void 점수_입력_테스트(Student student, String input, String expectedResult) {
         //given
         ScoreService.insertScore(student, input);
-        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).createPersonalScores();
+        Map<Subject, Integer> scoreMap = student.getScore().createPersonalScores();
 
         //when
         List<Subject> subjects = new ArrayList<>(scoreMap.keySet());
@@ -49,7 +50,7 @@ class ScoreTest {
 
         //when
         ScoreService.modifySubjectScore(student, input2, subject);
-        Map<Subject, Integer> scoreMap = TotalScore.findScore(student).createPersonalScores();
+        Map<Subject, Integer> scoreMap = student.getScore().createPersonalScores();
 
         List<Subject> subjects = new ArrayList<>(scoreMap.keySet());
         subjects.sort(Comparator.comparingInt(Enum::ordinal));

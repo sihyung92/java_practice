@@ -2,14 +2,16 @@ package com.practice.gradebook.service;
 
 import com.practice.gradebook.score.Score;
 import com.practice.gradebook.score.Subject;
-import com.practice.gradebook.score.TotalScore;
+import com.practice.gradebook.student.Rank;
 import com.practice.gradebook.student.Student;
 import com.practice.gradebook.student.Students;
 import com.practice.gradebook.view.OutputView;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
+// TODO: 2020-03-15 service와 view 분리시켜야 함
 public class ScoreService {
     private static final String DELIMITER = ",";
     private static final String WRONG_NUMBER_RANGE_MESSAGE = "0 에서 100 사이의 값을 입력해주세요.";
@@ -26,7 +28,8 @@ public class ScoreService {
     public static void insertScore(Student student, String input) {
         int[] scores = inputToScoreArray(input);
         Score score = new Score(scores[KOR_INDEX], scores[ENG_INDEX], scores[MATH_INDEX]);
-        TotalScore.add(student, score);
+        student.setScore(score);
+        Rank.calculateRank();
     }
 
     public static void modifyAllScore(Student student, String input) {
@@ -35,7 +38,7 @@ public class ScoreService {
 
     public static void modifySubjectScore(Student student, String input, Subject subject) {
         int modifiedScore = inputToOneScore(input);
-        TotalScore.findScore(student).modifyScore(subject, modifiedScore);
+        student.getScore().modifyScore(subject, modifiedScore);
     }
 
     private static int[] inputToScoreArray(String input) {
@@ -74,15 +77,33 @@ public class ScoreService {
         }
     }
 
-    public static void printTotalScore() {
-        TotalScore.showAllScores().entrySet()
+    public static void printTotalScoreSortByID() {
+        Students.list()
                 .stream()
-                .sorted(Comparator.comparingInt(x->x.getKey().getStudentID()))
+                .sorted(Comparator.comparingDouble(Student::getStudentID))
                 .forEach(x ->
-                        OutputView.printAllScore(x.getKey().getStudentID()
-                                , x.getValue().createPersonalScores().get(Subject.KOR)
-                                , x.getValue().createPersonalScores().get(Subject.ENG)
-                                , x.getValue().createPersonalScores().get(Subject.MATH))
+                        OutputView.printAllScore(x.getStudentID()
+                                , x.getScore().createPersonalScores().get(Subject.KOR)
+                                , x.getScore().createPersonalScores().get(Subject.ENG)
+                                , x.getScore().createPersonalScores().get(Subject.MATH)
+                                , Objects.isNull(x.getRank()) ? 0 : x.getRank().getClassRank()
+                                , Objects.isNull(x.getRank()) ? 0 : x.getRank().getTotalRank()
+                        )
+                );
+    }
+
+    public static void printTotalScoreSortByScore() {
+        Students.list()
+                .stream()
+                .sorted(Comparator.comparingDouble(x -> x.getScore().calculateAverage() * -1))
+                .forEach(x ->
+                        OutputView.printAllScore(x.getStudentID()
+                                , x.getScore().createPersonalScores().get(Subject.KOR)
+                                , x.getScore().createPersonalScores().get(Subject.ENG)
+                                , x.getScore().createPersonalScores().get(Subject.MATH)
+                                , Objects.isNull(x.getRank()) ? 0 : x.getRank().getClassRank()
+                                , Objects.isNull(x.getRank()) ? 0 : x.getRank().getTotalRank()
+                        )
                 );
     }
 

@@ -35,13 +35,13 @@ public class StudentService {
 
     private static int[] parseInt(String[] studentInformation) {
         int[] temp;
-        try{
+        try {
             temp = Arrays.stream(studentInformation)
                     .limit(INPUT_STUDENT_ARRAY_LENGTH - 1)
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
                     .toArray();
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberFormatException(WRONG_NUMBER_TYPE_MESSAGE);
         }
         return temp;

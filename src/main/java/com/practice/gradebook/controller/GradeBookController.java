@@ -13,6 +13,8 @@ public class GradeBookController {
     private static final int SCORE_INSERT_PROCESS = 3;
     private static final int SCORE_PRINT_PROCESS = 4;
     private static final int EXIT_PROCESS = 5;
+    public static final int SCORE_PRINT_SORT_BY_ID_PROCESS = 1;
+    public static final int SCORE_PRINT_SORT_BY_SCORE_PROCESS = 2;
 
     private static StudentService studentService = new StudentService();
 
@@ -31,7 +33,7 @@ public class GradeBookController {
                 insertScore();
             }
             if (process == SCORE_PRINT_PROCESS) {
-                printAllScore();
+                printAllScoreMenu();
             }
             if (process == EXIT_PROCESS) {
                 break;
@@ -40,9 +42,28 @@ public class GradeBookController {
         OutputView.printExit();
     }
 
-    private void printAllScore() {
+    private void printAllScoreMenu() {
+        OutputView.printScoreMenu();
+        while (true) {
+            int process = InputView.inputMenu();
+            if (process == SCORE_PRINT_SORT_BY_ID_PROCESS) {
+                printAllScoreSortByID();
+            }
+            if (process == SCORE_PRINT_SORT_BY_SCORE_PROCESS) {
+                printAllScoreSortByScore();
+            }
+            break;
+        }
+    }
+
+    private void printAllScoreSortByScore() {
         OutputView.printBeforeAllScore();
-        ScoreService.printTotalScore();
+        ScoreService.printTotalScoreSortByScore();
+    }
+
+    private void printAllScoreSortByID() {
+        OutputView.printBeforeAllScore();
+        ScoreService.printTotalScoreSortByID();
     }
 
     private void insertScore() {
