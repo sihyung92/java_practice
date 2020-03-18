@@ -2,6 +2,7 @@ package com.practice.gradebook.score;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Score {
@@ -38,5 +39,9 @@ public class Score {
     public Map<Subject, Integer> createPersonalScores() {
         return score.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public int of(Subject subject){
+        return Objects.requireNonNull(score.get(subject),"해당 과목 점수가 없습니다.");
     }
 }

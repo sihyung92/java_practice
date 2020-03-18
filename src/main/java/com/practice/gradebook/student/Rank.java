@@ -1,49 +1,54 @@
 package com.practice.gradebook.student;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Rank {
     private int classRank;
-    private int totalRank;
+    private int schoolRank;
 
-    public Rank(int classRank, int totalRank) {
+    public Rank(int classRank, int schoolRank) {
         this.classRank = classRank;
-        this.totalRank = totalRank;
+        this.schoolRank = schoolRank;
     }
 
-    public int getClassRank() {
+    public int classRank() {
         return classRank;
     }
 
-    public int getTotalRank() {
-        return totalRank;
+    public int schoolRank() {
+        return schoolRank;
     }
 
     public static void calculateRank() {
         List<Student> studentList = Students.list();
-        Map<Student, Integer> forSaveClassRankMap = new HashMap<>();
+        Map<Student, Integer> forSaveSchoolRankMap = new HashMap<>();
 
-        studentList = studentList.stream().filter(x -> Objects.nonNull(x.getScore())).collect(Collectors.toList());
+        studentList = studentList.stream().filter(Student::hasScore).collect(Collectors.toList());
 
-        studentList.sort((o1, o2) -> Comparator.<Student>comparingDouble(x -> x.getScore()
-                .calculateAverage())
-                .compare(o2, o1));
+        studentList.sort((o1, o2) -> (int) (o2.getScoreAverage() * 100 - o1.getScoreAverage() * 100));
 
-        ranking(studentList, forSaveClassRankMap);
+        ranking(studentList, forSaveSchoolRankMap);
 
         studentList.stream().collect(Collectors.groupingBy(x -> "" + x.getGradeNumber() + x.getClassNumber()))
-                .values().forEach(x -> ranking(x, forSaveClassRankMap));
+                .values().forEach(x -> {
+            System.out.println(x);
+            ranking(x, forSaveSchoolRankMap);
+
+        });
 
     }
 
-    private static void ranking(List<Student> studentList, Map<Student, Integer> forSaveClassRankMap) {
+    private static void ranking(List<Student> studentList, Map<Student, Integer> forSaveSchoolRankMap) {
         int prevRank = -1;
         int prevTotal = -1;
         int myRank;
         for (int i = 0; i < studentList.size(); i++) {
             Student aStudent = studentList.get(i);
-            int myTotal = studentList.get(i).getScore().calculateSum();
+            int myTotal = studentList.get(i).getScoreSum();
 
             if (prevTotal == myTotal) {
                 myRank = prevRank;
@@ -53,11 +58,13 @@ public class Rank {
 
             prevRank = myRank;
             prevTotal = myTotal;
-            Integer value = forSaveClassRankMap.put(aStudent, myRank);
-            if (Objects.nonNull(value)) {
-                aStudent.setRank(new Rank(value, myRank));
+            Integer schoolRank = forSaveSchoolRankMap.get(aStudent);
+            System.out.println(aStudent.getStudentID()+"마랭:"+myRank);
+            if (Objects.nonNull(schoolRank)) {
+                System.out.println(aStudent.getStudentID()+"스랭:"+schoolRank);
+                aStudent.setRank(new Rank(myRank, schoolRank));
             }
-            ;
+            forSaveSchoolRankMap.put(aStudent, myRank);
         }
     }
 }

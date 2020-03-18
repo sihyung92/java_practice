@@ -1,6 +1,7 @@
 package com.practice.gradebook.student;
 
 import com.practice.gradebook.score.Score;
+import com.practice.gradebook.score.Subject;
 
 import java.util.Objects;
 
@@ -46,10 +47,6 @@ public class Student {
         return name;
     }
 
-    public Score getScore(){
-        return score;
-    }
-
     public int getGradeNumber() {
         return gradeNumber;
     }
@@ -58,17 +55,42 @@ public class Student {
         return classNumber;
     }
 
-    public void setScore(Score score){
-        this.score = score;
+    public void createScore(int kor, int eng, int math){
+        this.score = new Score(kor,eng,math);
     }
 
-    public Rank getRank() {
-        return rank;
+    public int getSubjectScore(Subject subject){
+        return score.of(subject);
+    }
+
+    public int getScoreSum(){
+        return score.calculateSum();
+    }
+
+    public double getScoreAverage(){
+        return score.calculateAverage();
     }
 
     public void setRank(Rank rank) {
         this.rank = rank;
     }
+
+    public int schoolRank(){
+        return rank.schoolRank();
+    }
+
+    public int classRank(){
+        return rank.classRank();
+    }
+
+    public boolean hasRank() {
+        return Objects.nonNull(rank);
+    }
+
+    public boolean hasScore(){
+        return Objects.nonNull(score);
+    }
+
 
     @Override
     public boolean equals(Object o) {

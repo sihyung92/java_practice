@@ -15,7 +15,7 @@ public enum Subject {
     static Map<String, Subject> subjectList = new HashMap<>();
 
     static {
-        Stream.of(values()).collect(Collectors.toMap(subject -> subject.getNameInKorean(), Function.identity()));
+        subjectList = Stream.of(values()).collect(Collectors.toMap(subject -> subject.getNameInKorean(), Function.identity()));
     }
 
     String nameInKorean;

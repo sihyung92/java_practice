@@ -1,8 +1,10 @@
 package com.practice.gradebook.controller;
 
+import com.practice.gradebook.score.Subject;
 import com.practice.gradebook.service.ScoreService;
 import com.practice.gradebook.service.StudentService;
 import com.practice.gradebook.student.Student;
+import com.practice.gradebook.student.Students;
 import com.practice.gradebook.view.InputView;
 import com.practice.gradebook.view.OutputView;
 
@@ -58,12 +60,30 @@ public class GradeBookController {
 
     private void printAllScoreSortByScore() {
         OutputView.printBeforeAllScore();
-        ScoreService.printTotalScoreSortByScore();
+        ScoreService.makeListForPrintScoreSortByScore().stream()
+                .forEach(student ->
+                        OutputView.printAllScore(student.getStudentID()
+                                , student.getSubjectScore(Subject.KOR)
+                                , student.getSubjectScore(Subject.ENG)
+                                , student.getSubjectScore(Subject.MATH)
+                                , student.classRank()
+                                , student.schoolRank()
+                        )
+                );
     }
 
     private void printAllScoreSortByID() {
         OutputView.printBeforeAllScore();
-        ScoreService.printTotalScoreSortByID();
+        ScoreService.makeListForPrintScoreSortByID().stream()
+                .forEach(student ->
+                        OutputView.printAllScore(student.getStudentID()
+                                , student.getSubjectScore(Subject.KOR)
+                                , student.getSubjectScore(Subject.ENG)
+                                , student.getSubjectScore(Subject.MATH)
+                                , student.classRank()
+                                , student.schoolRank()
+                        )
+                );
     }
 
     private void insertScore() {
@@ -76,7 +96,11 @@ public class GradeBookController {
 
     private void printStudent() {
         OutputView.printStudentIntro();
-        studentService.printStudent();
+        Students.showStudentsIdAndName()
+                .stream()
+                .forEach(studentIdAndName ->
+                        OutputView.printStudentInfo(studentIdAndName[0], studentIdAndName[1])
+                );
     }
 
     private void registStudent() {

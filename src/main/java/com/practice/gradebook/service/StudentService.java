@@ -6,7 +6,6 @@ import com.practice.gradebook.view.OutputView;
 
 import java.util.Arrays;
 
-// TODO: 2020-03-14 outputview 와 service 분리시켜야함
 public class StudentService {
     public static final String DELIMITER = ",";
     public static final int INPUT_STUDENT_ARRAY_LENGTH = 4;
@@ -51,14 +50,6 @@ public class StudentService {
         if (temp.length != INPUT_STUDENT_ARRAY_LENGTH) {
             throw new IllegalArgumentException(WRONG_FORMAT_MESSAGE);
         }
-    }
-
-    public static void printStudent() {
-        Students.showStudentsIdAndName()
-                .stream()
-                .forEach(studentIdAndName ->
-                        OutputView.printStudentInfo(studentIdAndName[0], studentIdAndName[1])
-                );
     }
 
     public static Student findStudentByID(int inputStudentId) {
