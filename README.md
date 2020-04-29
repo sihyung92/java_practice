@@ -8,7 +8,6 @@ JUnit Test 코드를 작성하여 자바 학습과 테스트코드 연습 두 �
 > 학습용 서적  : 자바의 정석 3판(저자 : 남궁성)
 
 1일 : OOP(Object-oriented programming) 학습 - project Sutda : 섯다 카드 객체 생성, ENUM 활용, Junit 테스트 코드 작성
-[commit_b3679c](https://github.com/sihyung92/java_practice/commit/b3679c17b7226a9b298c577550d666e1741240d4)
 
 2일 : OOP 학습 - project Sutda : 섯다 기능 확장
 
@@ -21,3 +20,5 @@ JUnit Test 코드를 작성하여 자바 학습과 테스트코드 연습 두 �
 6일 : 컬렉션 프레임워크 연습, comparator 구현 연습
 
 7 ~ 14일 : 성적입력 프로그램 작성 
+
+15일 : 재귀함수 연습
