@@ -42,7 +42,7 @@ public class RecursiveExercise {
         StringBuffer gugudan = new StringBuffer();
         for (int i = 2; i < 10; i++) {
             for (int j = 1; j < 10; j++) {
-                gugudan.append(String.format("%d*%d=%d%n",i,j,i*j));
+                gugudan.append(String.format("%d*%d=%d%n", i, j, i * j));
             }
             gugudan.append("\n");
         }
@@ -50,16 +50,46 @@ public class RecursiveExercise {
     }
 
     //예제 3-2, 구구단(재귀식)
-    public String multiplyTableRecursive(int frontStart, String gugudan){
-        if( frontStart == 10 ){
+    public String multiplyTableRecursive(int frontStart, String gugudan) {
+        if (frontStart == 10) {
             return gugudan;
         }
 
-        for(int i = 1; i < 10; i++){
+        for (int i = 1; i < 10; i++) {
             gugudan += String.format("%d*%d=%d%n", frontStart, i, frontStart * i);
         }
         gugudan += "\n";
 
         return multiplyTableRecursive(frontStart + 1, gugudan);
+    }
+
+    //예제 4-1, 팩토리얼 (for문)
+    public int factorial(int n) {
+        int result = 1;
+        for (int i = n; i > 0; i--) {
+            result *= i;
+        }
+        return result;
+    }
+
+    //예제 4-2, 팩토리얼 (재귀함수)
+    public int factorialRecursive(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+
+    //예제 5-1, 회문 검증
+    public boolean isPalindrome(String str) {
+        if (str.isEmpty() || str.length() == 1) {
+            return true;
+        }
+
+        if (str.charAt(0) == str.charAt(str.length() - 1)) {
+            return isPalindrome(str.substring(1,str.length()-1));
+        }
+
+        return false;
     }
 }

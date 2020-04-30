@@ -1,4 +1,4 @@
-package com.practice.sutda.user;
+package com.practice.sutda.domain.user;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.practice.sutda.card;
+package com.practice.sutda.domain.card;
 
 public class Ddeng {
     private boolean ddeng;

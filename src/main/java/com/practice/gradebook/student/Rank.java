@@ -33,11 +33,14 @@ public class Rank {
 
         ranking(studentList, forSaveSchoolRankMap);
 
-        studentList.stream().collect(Collectors.groupingBy(x -> "" + x.getGradeNumber() + x.getClassNumber()))
-                .values().forEach(x -> {
-            System.out.println(x);
+        Map<String, List<Student>> collect = studentList.stream().collect(Collectors.groupingBy(x -> "" + x.getGradeNumber() + x.getClassNumber()));
+        System.out.println(collect.getClass());
+        for (String s : collect.keySet()) {
+            System.out.println("keySet : "+s);
+        }
+                collect.values().forEach(x -> {
+            System.out.println(x.getClass());
             ranking(x, forSaveSchoolRankMap);
-
         });
 
     }
@@ -59,9 +62,7 @@ public class Rank {
             prevRank = myRank;
             prevTotal = myTotal;
             Integer schoolRank = forSaveSchoolRankMap.get(aStudent);
-            System.out.println(aStudent.getStudentID()+"마랭:"+myRank);
             if (Objects.nonNull(schoolRank)) {
-                System.out.println(aStudent.getStudentID()+"스랭:"+schoolRank);
                 aStudent.setRank(new Rank(myRank, schoolRank));
             }
             forSaveSchoolRankMap.put(aStudent, myRank);

@@ -1,4 +1,4 @@
-package com.practice.sutda.card;
+package com.practice.sutda.domain.card;
 
 import java.util.*;
 

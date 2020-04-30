@@ -30,4 +30,20 @@ class RecursiveExerciseTest {
     void multiplyTable() {
         assertThat(exercise.multiplyTable()).isEqualTo(exercise.multiplyTableRecursive(2,""));
     }
+
+    @DisplayName("팩토리얼")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6,7,8})
+    void factorial(int n) {
+        assertThat(exercise.factorial(n)).isEqualTo(exercise.factorialRecursive(n));
+    }
+
+    @DisplayName("회문검증")
+    @ParameterizedTest
+    @ValueSource(strings = {"Do geese see God","Was it a car or a cat I saw","","123454321"})
+    void isPalindrome(String str) {
+        str = str.toLowerCase();
+        str = str.replace(" ","");
+        assertThat(exercise.isPalindrome(str)).isTrue();
+    }
 }

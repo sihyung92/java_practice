@@ -1,7 +1,7 @@
-package com.practice.sutda.user;
+package com.practice.sutda.domain.user;
 
-import com.practice.sutda.card.SutdaCard;
-import com.practice.sutda.card.Ddeng;
+import com.practice.sutda.domain.card.SutdaCard;
+import com.practice.sutda.domain.card.Ddeng;
 
 import java.util.ArrayList;
 import java.util.List;

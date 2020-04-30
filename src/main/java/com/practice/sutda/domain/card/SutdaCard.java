@@ -1,6 +1,5 @@
-package com.practice.sutda.card;
+package com.practice.sutda.domain.card;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public enum SutdaCard {
@@ -26,7 +25,6 @@ public enum SutdaCard {
     TEN_TWO(10, "10월", false);
 
     private static final SutdaCard[] SUTDA_CARD_NUMBERS = SutdaCard.values();
-
     private static final String ERROR_MESSAGE_OUT_OF_NUMBER = "올바르지 않은 숫자입니다.";
     private static final int MIN_SUTDA_NUMBER = 1;
     private static final int MAX_SUTDA_NUMBER = 10;
@@ -58,4 +56,5 @@ public enum SutdaCard {
     public boolean isKwang() {
         return kwang;
     }
+
 }

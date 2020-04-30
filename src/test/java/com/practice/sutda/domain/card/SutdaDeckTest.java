@@ -1,4 +1,4 @@
-package com.practice.sutda.card;
+package com.practice.sutda.domain.card;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
